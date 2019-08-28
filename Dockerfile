@@ -7,8 +7,8 @@ RUN pecl install -o -f imagick-3.4.3 \
 	&&  rm -rf /tmp/pear \
 	&&  docker-php-ext-enable imagick
 
-RUN apt-get install -y libxml2-dev php-soap \
-  && docker-php-ext-install soap
+RUN docker-php-ext-install soap \
+    && docker-php-ext-enable soap
 
 RUN apt-get install -y git
 
