@@ -1,11 +1,15 @@
 FROM php:7.2.19-apache
 
 RUN apt-get update \
-	&&  apt-get install -y libmemcached-dev zlib1g-dev imagemagick libmagickwand-dev bc
+	&&  apt-get install -y libmemcached-dev zlib1g-dev imagemagick libmagickwand-dev bc \
+	&&  apt-get install -y sendmail libmcrypt-dev gettext locales
 
 RUN pecl install -o -f imagick-3.4.3 \
 	&&  rm -rf /tmp/pear \
 	&&  docker-php-ext-enable imagick
+	
+RUN docker-php-ext-install gettext \
+    && docker-php-ext-enable gettext
 
 RUN docker-php-ext-install soap \
     && docker-php-ext-enable soap
